@@ -7,18 +7,20 @@ body {
   background: -webkit-radial-gradient(  #2b1339, #380c77);
   background: radial-gradient(   #2b1339, #380c77);
 
-  &.landing { background-color: #5B5579; }
+  &.landing {
+    background-color: #5B5579;
+  }
+
+  .navbar {
+    margin-bottom: 0;
+    background: #2c1231;
+  }
 }
 
-.nav-bar {
-  background-color: #2C1231;
-  height: 90px;
-  padding: 0 100px;
-}
 
 .hero-content {
   background-color: #2F1D57;
-  padding: 100px;
+  padding: 100px 0;
 
   h1 {
     font-size: 70px;
@@ -28,7 +30,7 @@ body {
 }
 
 .selling-points {
-  padding: 100px;
+  padding: 100px 0;
 
   .point {
     width: 32%;
@@ -45,6 +47,47 @@ body {
 
     p {
       font-size: 14px;
+    }
+  }
+}
+
+// Album Styles
+.album-header-container {
+  margin-top: 55px;
+  margin-bottom: 40px;
+}
+
+.album-header-information {
+  margin-top: 45px;
+  margin-bottom: 20px;
+
+  h3, h4, h5 {
+    line-height: 150%;
+  }
+
+  h3 {
+    font-size: 48px;
+    font-weight: 300;
+  }
+
+  h4 {
+    font-size: 24px;
+    font-weight: 700;
+  }
+
+  h5 {
+    font-size: 16px;
+    font-weight: 500;
+  }
+}
+
+.table {
+  &.album-song-listing {
+    font-weight: 300;
+
+    td {
+      padding: 20px;
+      border-top: 1px solid rgba(255, 255, 255, .4);
     }
   }
 }
