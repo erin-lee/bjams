@@ -1,0 +1,48 @@
+html { height: 100%; }
+
+body {
+  font-family: "Open Sans", sans-serif;
+  color: #fff;
+  min-height: 100%;
+
+  &.landing { background-color: #5B5579; }
+}
+
+.nav-bar {
+  background-color: #2C1231;
+  height: 90px;
+  padding: 0 100px;
+}
+
+.hero-content {
+  background-color: #2F1D57;
+  padding: 100px;
+
+  h1 {
+    font-size: 70px;
+    font-weight: 300;
+    margin-bottom: 50px;
+  }
+}
+
+.selling-points {
+  padding: 100px;
+
+  .point {
+    width: 32%;
+    float: left;
+    padding: 0 0.5%;
+
+    h5 {
+      font-size: 24px;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 20px;
+      height: 85px;
+    }
+
+    p {
+      font-size: 14px;
+    }
+  }
+}
