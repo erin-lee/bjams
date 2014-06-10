@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
     this.style.marginTop = 0;
   };
 
+  console.log('this works?');
   sellPoint.addEventListener('mouseover', onHoverAction);
   sellPoint.addEventListener('mouseout', offHoverAction);
-
 });
