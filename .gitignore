@@ -1,5 +1,6 @@
 node_modules
 bower_components
-#public
+public/javascripts/*
+public/images/*
 *.swp
 npm-debug.log

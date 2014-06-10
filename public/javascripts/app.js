@@ -92,6 +92,7 @@
 })();
 require.register("scripts/app", function(exports, require, module) {
 require("./landing");
+require("./collection");
 });
 
 ;require.register("scripts/collection", function(exports, require, module) {
@@ -151,9 +152,9 @@ document.addEventListener('DOMContentLoaded', function() {
     this.style.marginTop = 0;
   };
 
+  console.log('this works?');
   sellPoint.addEventListener('mouseover', onHoverAction);
   sellPoint.addEventListener('mouseout', offHoverAction);
-
 });
 });
 
