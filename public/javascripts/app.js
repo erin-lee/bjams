@@ -90,16 +90,80 @@
   globals.require.list = list;
   globals.require.brunch = true;
 })();
-require.register("scripts/app", function(exports, require, module) {
+require.register("scripts/album", function(exports, require, module) {
+var createSongRow = function(songNumber, songName, songLength) {
+  var template =
+      '<tr>'
+    + '  <td class="col-md-1">' + songNumber + '</td>'
+    + '  <td class="col-md-9">' + songName + '</td>'
+    + '  <td class="col-md-2">' + songLength + '</td>'
+    + '</tr>'
+    ;
+
+  return $(template);
+};
+
+// Example Album
+var albumMarconi = {
+  name: 'The Telephone',
+  artist: 'Guglielmo Marconi',
+  label: 'EM',
+  year: '1909',
+  albumArtUrl: '/images/album-placeholder.png',
+
+  songs: [
+      { name: 'Hello, Operator?', length: '1:01' },
+      { name: 'Ring, ring, ring', length: '5:01' },
+      { name: 'Fits in your pocket', length: '3:21'},
+      { name: 'Can you hear me now?', length: '3:14' },
+      { name: 'Wrong phone number', length: '2:15'}
+    ]
+};
+
+var changeAlbumView = function(album) {
+  var $albumTitle = $('.album-title');
+  $albumTitle.text(album.name);
+
+  var $albumArtist = $('.album-artist');
+  $albumArtist.text(album.artist);
+
+  var $albumMeta = $('.album-meta-info');
+  $albumMeta.text(album.year + ' on ' + album.label);
+
+  var $songList = $('.album-song-listing');
+  $songList.empty();
+  var songs = album.songs;
+
+  for (var i = 0; i < songs.length; i++) {
+    var songData = songs[i];
+    var $newRow = createSongRow(i, songData.name, songData.length);
+    $songList.append($newRow);
+  }
+};
+
+if (document.URL.match(/\/album.html/)) {
+  document.addEventListener('DOMContentLoaded', function() {
+    var album = albumMarconi;
+
+    changeAlbumView(albumMarconi);
+  });
+}
+
+});
+
+;require.register("scripts/app", function(exports, require, module) {
 require("./landing");
 require("./collection");
+require("./album");
 });
 
 ;require.register("scripts/collection", function(exports, require, module) {
 var buildAlbumThumbnail = function() {
    var template =
        '<div class="collection-album-container col-md-2">'
-     + '  <img src="/images/album-placeholder.png"/>'
+     + '  <div class="collection-album-image-container">'
+     + '    <img src="/images/album-placeholder.png"/>'
+     + '  </div>'
      + '  <div class="caption album-collection-info">'
      + '    <p>'
      + '      <a class="album-name" href="/album.html"> Album Name </a>'
@@ -115,6 +179,23 @@ var buildAlbumThumbnail = function() {
   return $(template);
 };
 
+var buildAlbumOverlay = function(albumURL) {
+  var template =
+      '<div class="collection-album-image-overlay">'
+    + '  <div class="collection-overlay-content">'
+    + '    <a class="collection-overlay-button" href="' + albumURL + '">'
+    + '      <i class="fa fa-play"></i>'
+    + '    </a>'
+    + '    &nbsp;'
+    + '    <a class="collection-overlay-button">'
+    + '      <i class="fa fa-plus"></i>'
+    + '    </a>'
+    + '  </div>'
+    + '</div>'
+    ;
+  return $(template);
+};
+
 var updateCollectionView = function() {
   var $collection = $(".collection-container .row");
   $collection.empty();
@@ -123,6 +204,16 @@ var updateCollectionView = function() {
     var $newThumbnail = buildAlbumThumbnail();
     $collection.append($newThumbnail);
   };
+
+  var onHover = function(e) {
+    $(this).append(buildAlbumOverlay("/album.html"));
+  };
+
+  var offHover = function(e) {
+    $(this).find('.collection-album-image-overlay').remove();
+  }
+
+  $collection.find('.collection-album-image-container').hover(onHover, offHover);
 };
 
 if (document.URL.match(/\/collection.html/)) {
