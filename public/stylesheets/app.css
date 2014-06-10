@@ -22,7 +22,10 @@ body {
     margin-bottom: 50px; }
 
 .selling-points {
-  padding: 100px 0; }
+  padding: 100px 0;
+  -webkit-transition: all 0.15s ease-out 0;
+  -moz-transition: all 0.15s ease-out 0;
+  transition: all 0.15s ease-out 0; }
   .selling-points .point {
     width: 32%;
     float: left;
