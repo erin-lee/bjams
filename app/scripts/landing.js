@@ -16,13 +16,9 @@ $('document').ready('DOMContentLoaded', function() {
     this.style.marginTop = 0;
   };
 
-  // debugger;
   for( var x=0; x< sellPoint.length; x++) {
     sellPoint[x].addEventListener('mouseover', onHoverAction);
     sellPoint[x].addEventListener('mouseout', offHoverAction);
   }
 
-
-  // sellPoint.addEventListener('mouseover', onHoverAction);
-  // sellPoint.addEventListener('mouseout', offHoverAction);
 });

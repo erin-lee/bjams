@@ -49,7 +49,7 @@ var changeAlbumView = function(album) {
 };
 
 if (document.URL.match(/\/album.html/)) {
-  document.addEventListener('DOMContentLoaded', function() {
+  $(document).ready(function() {
     var album = albumMarconi;
 
     changeAlbumView(albumMarconi);

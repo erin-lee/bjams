@@ -57,7 +57,7 @@ var updateCollectionView = function() {
 };
 
 if (document.URL.match(/\/collection.html/)) {
-  document.addEventListener('DOMContentLoaded', function() {
+  $(document).ready(function() {
 
     updateCollectionView();
   });
