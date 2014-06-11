@@ -33,9 +33,8 @@
     "debug": "~0.7.2",
     "ansi-color": "0.2",
     "date-utils": "1.2",
-    "cordell": "0.1",
-    "growl": "*",
     "cordell": "*",
+    "growl": "*",
     "consolidate": "*",
     "ejs": "*",
     "mongoose": "*",
@@ -44,7 +43,8 @@
     "express-namespace": "*",
     "passport-local": "*",
     "passport": "*",
-    "bower": "1.3.3"
+    "bower": "1.3.3",
+    "handlebars-brunch": "~1.7.7"
   },
   "devDependencies": {
     "mocha": "*",
