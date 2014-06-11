@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+$('document').ready('DOMContentLoaded', function() {
   var heroTitle
   , subText
   , sellPoint = document.querySelectorAll('.selling-points .point');
@@ -16,7 +16,13 @@ document.addEventListener('DOMContentLoaded', function() {
     this.style.marginTop = 0;
   };
 
-  console.log('this works?');
-  sellPoint.addEventListener('mouseover', onHoverAction);
-  sellPoint.addEventListener('mouseout', offHoverAction);
+  // debugger;
+  for( var x=0; x< sellPoint.length; x++) {
+    sellPoint[x].addEventListener('mouseover', onHoverAction);
+    sellPoint[x].addEventListener('mouseout', offHoverAction);
+  }
+
+
+  // sellPoint.addEventListener('mouseover', onHoverAction);
+  // sellPoint.addEventListener('mouseout', offHoverAction);
 });
