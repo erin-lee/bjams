@@ -7,6 +7,9 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,800,600,700,300' rel='stylesheet' type='text/css'>
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/stylesheets/app.css">
+    <script src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0-alpha.4/handlebars.min.js"></script>
+    <script src='/javascripts/vendor.js'></script>
   </head>
   <body>
     <!-- Nav Bar -->
@@ -41,7 +44,17 @@
         <table class="album-song-listing table"></table>
       </div>
     </div>
-    <script src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script>
+
+    <!-- Template: SongRow -->
+    <script id="songRow" type="text/x-handlebars-template">
+      {{#each}}
+        <tr>
+          <td class="col-md-1"> {{ @index }} </td>
+          <td class="col-md-9"> {{ name }} </td>
+          <td class="col-md-2"> {{ length }} </td>
+        </tr>
+      {{/each}}
+    </script>
     <script src='/javascripts/app.js'></script>
     <script>
       require('scripts/app');

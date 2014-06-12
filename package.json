@@ -43,8 +43,7 @@
     "express-namespace": "*",
     "passport-local": "*",
     "passport": "*",
-    "bower": "1.3.3",
-    "handlebars-brunch": "~1.7.7"
+    "bower": "1.3.3"
   },
   "devDependencies": {
     "mocha": "*",

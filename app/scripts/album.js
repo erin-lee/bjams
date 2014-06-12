@@ -1,15 +1,3 @@
-var createSongRow = function(songNumber, songName, songLength) {
-  var template =
-      '<tr>'
-    + '  <td class="col-md-1">' + songNumber + '</td>'
-    + '  <td class="col-md-9">' + songName + '</td>'
-    + '  <td class="col-md-2">' + songLength + '</td>'
-    + '</tr>'
-    ;
-
-  return $(template);
-};
-
 // Example Album
 var albumMarconi = {
   name: 'The Telephone',
@@ -28,30 +16,21 @@ var albumMarconi = {
 };
 
 var changeAlbumView = function(album) {
-  var $albumTitle = $('.album-title');
-  $albumTitle.text(album.name);
+  var $songList = $('.album-song-listing')
+  , songs = album.songs
+  , $songRow = $('#songRow').html()
+  , songRow = Handlebars.compile($songRow)
+  , temp = songRow(songs)
+  ;
 
-  var $albumArtist = $('.album-artist');
-  $albumArtist.text(album.artist);
-
-  var $albumMeta = $('.album-meta-info');
-  $albumMeta.text(album.year + ' on ' + album.label);
-
-  var $songList = $('.album-song-listing');
   $songList.empty();
-  var songs = album.songs;
-
-  for (var i = 0; i < songs.length; i++) {
-    var songData = songs[i];
-    var $newRow = createSongRow(i, songData.name, songData.length);
-    $songList.append($newRow);
-  }
+  $songList.append(temp);
 };
 
 if (document.URL.match(/\/album.html/)) {
   $(document).ready(function() {
     var album = albumMarconi;
 
-    changeAlbumView(albumMarconi);
+    changeAlbumView(album);
   });
 }
