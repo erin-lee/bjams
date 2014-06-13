@@ -7,13 +7,11 @@
    background: rgba(255, 255, 255, 0.3);
    z-index: 100;
 
-
    a, a:hover {
      color: white;
      cursor: pointer;
      text-decoration: none;
    }
-
 
    .container {
      display: table;
@@ -53,8 +51,6 @@
       }
    }
 
-
-
    .currently-playing {
      width: 50%;
      text-align: center;
@@ -71,13 +67,10 @@
        font-size: 16px;
        font-weight: 300;
      }
-     
-     .song-name {
-       top: 20px;
-     }
-     .artist-name {
-       bottom: 20px;
-     }
+
+     .song-name { top: 20px; }
+
+     .artist-name { bottom: 20px; }
    }
 
 
@@ -119,7 +112,6 @@
      top: 10px;
    }
  }
-
 
  .seek-bar {
    height: 5px;
