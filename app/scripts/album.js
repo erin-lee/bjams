@@ -27,9 +27,28 @@ var changeAlbumView = function(album) {
   $songList.append(temp);
 };
 
+var clickHandler = function(e) {
+  var currentlyPlayingSong = true;
+
+  if (currentlyPlayingSong) {
+    $(this).addClass('active');
+  };
+
+  if ( currentlyPlayingSong ) {
+    $(this).find('.fa').removeClass('fa-play').addClass('fa-pause');
+    currentlyPlayingSong = true;
+  } else if (currentlyPlayingSong === songNumber) {
+    $(this).find('.fa').removeClass('fa-pause').addClass('fa-play');
+    currentlyPlayingSong = null;
+  }
+
+};
+
 if (document.URL.match(/\/album.html/)) {
   $(document).ready(function() {
     var album = albumMarconi;
+
+    $('.album-song-listing').on('click', '.song-number', clickHandler);
 
     changeAlbumView(album);
   });

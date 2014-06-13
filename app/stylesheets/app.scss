@@ -57,9 +57,11 @@ body {
   min-height: 100%;
   background: -webkit-radial-gradient(  #2b1339, #380c77);
   background: radial-gradient(   #2b1339, #380c77);
+  padding-bottom: 150px;
 
   &.landing {
     background-color: #5B5579;
+    padding-bottom: 0;
   }
 
   .navbar {
@@ -212,4 +214,46 @@ body {
   img {
     max-width: 100%;
   }
+}
+
+.album-song-listing {
+  tr {
+    &:hover,
+    .active {
+      .album-song-button { display: inline-block; }
+      .album-number { display: none; }
+    }
+  }
+
+  td {
+    vertical-align: center;
+
+    &.song-number {
+      padding: 0;
+      height: 70px;
+      text-align: center;
+    }
+  }
+
+}
+
+.album-song-button {
+  display: none;
+  text-align: center;
+  font-size: 14px;
+  background-color: white;
+  color: #d2287b;
+  border-radius: 50% 50%;
+  width: 28px;
+  height: 28px;
+
+  &:hover {
+    cursor: pointer;
+    color: white;
+    background-color: #d2287b;
+  }
+
+  i { line-height: 28px; }
+
+  .fa-play { padding-left: 5px; }
 }
