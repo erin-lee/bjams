@@ -15,6 +15,8 @@ var albumMarconi = {
     ]
 };
 
+var currentlyPlayingSong = null;
+
 var changeAlbumView = function(album) {
   var $songList = $('.album-song-listing')
   , songs = album.songs
@@ -28,18 +30,20 @@ var changeAlbumView = function(album) {
 };
 
 var clickHandler = function(e) {
-  var currentlyPlayingSong = true;
-
-  if (currentlyPlayingSong) {
-    $(this).addClass('active');
-  };
+  var $this = $(this)
+  , $row = $('tr')
+  , icon = $row.find('.fa');
 
   if ( currentlyPlayingSong ) {
-    $(this).find('.fa').removeClass('fa-play').addClass('fa-pause');
-    currentlyPlayingSong = true;
-  } else if (currentlyPlayingSong === songNumber) {
-    $(this).find('.fa').removeClass('fa-pause').addClass('fa-play');
+    $row.find('.song-number').removeClass('active')
+    icon.removeClass('fa-pause')
+    icon.addClass('fa-play')
+    $this.addClass('active');
+    $this.find('.fa').removeClass('fa-play').addClass('fa-pause');
     currentlyPlayingSong = null;
+  } else {
+    $this.find('.fa').removeClass('fa-pause').addClass('fa-play');
+    currentlyPlayingSong = true;
   }
 
 };
