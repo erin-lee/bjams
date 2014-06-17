@@ -3,6 +3,22 @@
 // require("./album");
 // require("./profile");
 
+// Example album.
+var albumPicasso = {
+  name: 'The Colors',
+  artist: 'Pablo Picasso',
+  label: 'Cubism',
+  year: '1881',
+  albumArtUrl: '/images/album-placeholder.png',
+
+  songs: [
+      { name: 'Blue', length: '4:26' },
+      { name: 'Green', length: '3:14' },
+      { name: 'Red', length: '5:01' },
+      { name: 'Pink', length: '3:21'},
+      { name: 'Magenta', length: '2:15'}
+    ]
+};
 
 var app = angular.module('blocJams', ['ui.router']);
 
@@ -19,6 +35,12 @@ app.config(['$stateProvider', '$locationProvider', function($stateProvider, $loc
     url: '/song',
     // controller: 'LandingController',
     templateUrl: '/templates/song.html'
+  });
+
+  $stateProvider.state('collection', {
+    url: '/collection',
+    controller: 'CollectionController',
+    templateUrl: '/templates/collection.html'
   });
 }]);
 
@@ -46,4 +68,12 @@ app.controller('LandingController', ['$scope', function($scope) {
     '/images/album-placeholders/album-8.jpg',
     '/images/album-placeholders/album-9.jpg',
   ];
+}]);
+
+app.controller('CollectionController', ['$scope', function($scope) {
+  $scope.albums = [];
+
+  for (var i = 0; i < 33; i++) {
+    $scope.albums.push(angular.copy(albumPicasso));
+  }
 }]);
