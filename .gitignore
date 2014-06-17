@@ -3,5 +3,6 @@ bower_components
 public/javascripts
 public/images
 public/stylesheets
+public/templates
 *.swp
 npm-debug.log
