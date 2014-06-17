@@ -29,6 +29,45 @@ var changeAlbumView = function(album) {
   $songList.append(temp);
 };
 
+var updateSeekPercentage = function($seekBar, e) {
+  var barWidth = $seekBar.width();
+  var offsetX = e.pageX = $seekBar.offset().left;
+
+  var offsetXPercent = (offsetX / $seekBar.width()) * 100;
+  offsetXPercent = Math.max(0, offsetXPercent);
+  offsetXPercent = Math.min(100, offsetXPercent);
+
+  var percentageString = offsetXPercent + '%';
+  $seekBar.find('.fill').width(percentageString);
+  $seekBar.find('.thumb').css({left: percentageString});
+};
+
+var setupSeekBars = function() {
+  $seekBars = $('.player-bar .seek-bar');
+  $seekBars.click(function(e) {
+    updateSeekPercentage($(this), e);
+  });
+
+  $seekBars.find('.thumb').mousedown(function(e){
+    var $seekBar = $(this).parent();
+
+    $seekBar.addClass('no-animate');
+
+    $(document).bind('mousemove.thumb', function(e){
+      updateSeekPercentage($seekBar, e);
+    });
+
+    //cleanup
+    $(document).bind('mouseup.thumb', function(){
+      $seekBar.removeClass('no-animate');
+
+      $(document).unbind('mousemove.thumb');
+      $(document).unbind('mouseup.thumb');
+    });
+
+  });
+};
+
 var clickHandler = function(e) {
   var $this = $(this)
   , $row = $('tr')
@@ -55,5 +94,6 @@ if (document.URL.match(/\/album.html/)) {
     $('.album-song-listing').on('click', '.song-number', clickHandler);
 
     changeAlbumView(album);
+    setupSeekBars();
   });
 }
