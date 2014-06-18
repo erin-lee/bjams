@@ -45,8 +45,13 @@ app.config(['$stateProvider', '$locationProvider', function($stateProvider, $loc
 
   $stateProvider.state('album', {
     url: '/album',
-    controller: 'AlbumController',
-    templateUrl: '/templates/album.html'
+    views: {
+      '': {
+        templateUrl: '/templates/album.html',
+        controller: 'AlbumController'
+      },
+      'playerBar@album': { templateUrl: '/templates/player_bar.html' }
+    }
   });
 }]);
 
