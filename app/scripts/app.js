@@ -42,9 +42,15 @@ app.config(['$stateProvider', '$locationProvider', function($stateProvider, $loc
     controller: 'CollectionController',
     templateUrl: '/templates/collection.html'
   });
+
+  $stateProvider.state('album', {
+    url: '/album',
+    controller: 'AlbumController',
+    templateUrl: '/templates/album.html'
+  });
 }]);
 
-app.controller('LandingController', ['$scope', function($scope) {
+app.controller('LandingController', function($scope) {
   console.log('LandingController');
   $scope.subText = "Turn the music up!";
   $scope.title = "Bloc Jams";
@@ -68,12 +74,44 @@ app.controller('LandingController', ['$scope', function($scope) {
     '/images/album-placeholders/album-8.jpg',
     '/images/album-placeholders/album-9.jpg',
   ];
-}]);
+});
 
-app.controller('CollectionController', ['$scope', function($scope) {
+app.controller('CollectionController', function($scope) {
   $scope.albums = [];
 
   for (var i = 0; i < 33; i++) {
     $scope.albums.push(angular.copy(albumPicasso));
   }
-}]);
+});
+
+app.controller('AlbumController', function($scope) {
+  $scope.album = angular.copy(albumPicasso);
+
+  var hoveredSong = null;
+  var playingSong = null;
+
+  $scope.onHoverSong = function(song) {
+    hoveredSong = song;
+  };
+
+  $scope.offHoverSong = function(song) {
+    hoveredSong = null;
+  };
+
+  $scope.getSongState = function(song) {
+    if (song === playingSong) {
+      return 'playing';
+    } else if (song === hoveredSong) {
+      return 'hovered';
+    }
+    return 'default';
+  };
+
+  $scope.playSong = function(song) {
+    playingSong = song;
+  };
+
+  $scope.pauseSong = function(song) {
+    playingSong = null;
+  };
+});

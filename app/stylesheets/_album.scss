@@ -32,6 +32,7 @@
     font-weight: 300;
 
     td {
+      height: 70px;
       padding: 20px;
       border-top: 1px solid rgba(255, 255, 255, .4);
     }
@@ -51,8 +52,6 @@
     vertical-align: center;
 
     &.song-number {
-      padding: 0;
-      height: 70px;
       text-align: center;
     }
   }
