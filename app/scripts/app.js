@@ -29,21 +29,18 @@ app.config(['$stateProvider', '$locationProvider', function($stateProvider, $loc
     url: '/',
     controller: 'LandingController',
     templateUrl: '/templates/landing.html'
-  });
-
-  $stateProvider.state('song', {
+  })
+  .state('song', {
     url: '/song',
     // controller: 'LandingController',
     templateUrl: '/templates/song.html'
-  });
-
-  $stateProvider.state('collection', {
+  })
+  .state('collection', {
     url: '/collection',
     controller: 'CollectionController',
     templateUrl: '/templates/collection.html'
-  });
-
-  $stateProvider.state('album', {
+  })
+  .state('album', {
     url: '/album',
     views: {
       '': {
@@ -92,31 +89,14 @@ app.controller('CollectionController', function($scope) {
 app.controller('AlbumController', function($scope) {
   $scope.album = angular.copy(albumPicasso);
 
-  var hoveredSong = null;
-  var playingSong = null;
+  $scope.selectedIndex = 0;
 
-  $scope.onHoverSong = function(song) {
-    hoveredSong = song;
+  $scope.playSong = function($index) {
+    $scope.selectedIndex = $index;
+    $scope.playing = $index;
+
+    console.log($index);
+    console.log($scope.playing);
   };
 
-  $scope.offHoverSong = function(song) {
-    hoveredSong = null;
-  };
-
-  $scope.getSongState = function(song) {
-    if (song === playingSong) {
-      return 'playing';
-    } else if (song === hoveredSong) {
-      return 'hovered';
-    }
-    return 'default';
-  };
-
-  $scope.playSong = function(song) {
-    playingSong = song;
-  };
-
-  $scope.pauseSong = function(song) {
-    playingSong = null;
-  };
 });

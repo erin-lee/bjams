@@ -42,7 +42,7 @@
 .album-song-listing {
   tr {
     &:hover,
-    .active {
+    .playing {
       .album-song-button { display: inline-block; }
       .album-number { display: none; }
     }
