@@ -21,10 +21,8 @@
 
           <a href="" class="album-song-button"
             ng-click="playSong($index)">
-
-            <i class="fa fa-play" ng-show="playing"></i>
-            <i class="fa fa-pause" ng-hide="playing"></i>
-
+            <i class="fa"
+              ng-class="{ 'fa-pause' : $index == selectedIndex, 'fa-play' : $index !== selectedIndex }"></i>
           </a>
           <span class="album-number song-number">{{ $index + 1 }}</span>
 

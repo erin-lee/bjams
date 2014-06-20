@@ -90,13 +90,10 @@ app.controller('AlbumController', function($scope) {
   $scope.album = angular.copy(albumPicasso);
 
   $scope.selectedIndex = 0;
+  var playingSong = null;
 
   $scope.playSong = function($index) {
     $scope.selectedIndex = $index;
-    $scope.playing = $index;
-
-    console.log($index);
-    console.log($scope.playing);
   };
 
 });
