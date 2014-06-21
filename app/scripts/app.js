@@ -53,7 +53,6 @@ app.config(['$stateProvider', '$locationProvider', function($stateProvider, $loc
 }]);
 
 app.controller('LandingController', function($scope) {
-  console.log('LandingController');
   $scope.subText = "Turn the music up!";
   $scope.title = "Bloc Jams";
   $scope.subTextClicked = function() {
@@ -86,13 +85,60 @@ app.controller('CollectionController', function($scope) {
   }
 });
 
-app.controller('AlbumController', function($scope) {
+app.controller('AlbumController', ['$scope', 'SongPlayer', function($scope, SongPlayer) {
   $scope.album = angular.copy(albumPicasso);
 
-  $scope.selectedIndex = 0;
+  var hoveredSong = null;
+  var playingSong = null;
 
-  $scope.playSong = function($index) {
-    $scope.selectedIndex = $index;
+  $scope.onHoverSong = function(song) {
+    hoveredSong = song;
   };
 
+  $scope.offHoverSong = function(song) {
+    hoveredSong = null;
+  };
+
+  $scope.getSongState = function(song) {
+    if (song === SongPlayer.currentSong && SongPlayer.playing) {
+      return 'playing';
+    }
+    else if (song === hoveredSong) {
+      return 'hovered';
+    }
+    return 'default';
+  };
+
+  $scope.playSong = function(song) {
+    SongPlayer.setSong($scope.album, song);
+    SongPlayer.play();
+  };
+
+  $scope.pauseSong = function(song) {
+    SongPlayer.pause();
+  };
+
+}]);
+
+app.controller('PlayerBarController', ['$scope', 'SongPlayer', function($scope, SongPlayer) {
+  $scope.songPlayer = SongPlayer;
+}]);
+
+app.service('SongPlayer', function(){
+  return {
+    currentSong: null,
+    currentAlbum: null,
+    playing: false,
+
+    play: function() {
+      this.playing = true;
+    },
+    pause: function() {
+      this.playing = false;
+    },
+    setSong: function(album, song) {
+      this.currentAlbum = album;
+      this.currentSong = song;
+    }
+  };
 });

@@ -41,8 +41,7 @@
 
 .album-song-listing {
   tr {
-    &:hover,
-    .playing {
+    &:hover {
       .album-song-button { display: inline-block; }
       .album-number { display: none; }
     }
