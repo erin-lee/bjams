@@ -85,7 +85,7 @@ app.controller('CollectionController', function($scope) {
   }
 });
 
-app.controller('AlbumController', ['$scope', 'SongPlayer', function($scope, SongPlayer) {
+app.controller('AlbumController', ['$scope', 'SongPlayer', 'ConsoleLogger',function($scope, SongPlayer, ConsoleLogger) {
   $scope.album = angular.copy(albumPicasso);
 
   var hoveredSong = null;
@@ -117,12 +117,22 @@ app.controller('AlbumController', ['$scope', 'SongPlayer', function($scope, Song
   $scope.pauseSong = function(song) {
     SongPlayer.pause();
   };
-
+  $scope.logger = ConsoleLogger;
+  console.log(ConsoleLogger);
 }]);
 
-app.controller('PlayerBarController', ['$scope', 'SongPlayer', function($scope, SongPlayer) {
+app.controller('PlayerBarController', ['$scope', 'SongPlayer', 'ConsoleLogger', function($scope, SongPlayer, ConsoleLogger) {
   $scope.songPlayer = SongPlayer;
 }]);
+
+app.service('ConsoleLogger', function() {
+  return {
+    text: 'Hello World',
+    log: function() {
+      console.log(this.text);
+    }
+  }
+});
 
 app.service('SongPlayer', function(){
   return {
