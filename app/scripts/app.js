@@ -190,6 +190,47 @@ app.service('SongPlayer', function(){
   };
 });
 
+app.directive('clickMe', function() {
+  return {
+    restrict: 'C',
+    link: function(scope, element) {
+      $(element).on('click', function(){
+        alert('Yikes!');
+      });
+    }
+  };
+});
+
+app.directive('countHoverTime', [function () {
+  return {
+    restrict: 'A',
+    link: function (scope, iElement, iAttrs) {
+      var counter = 0;
+      var onHover = $(iElement).on('mouseover', function() {
+        counter = 0;
+        setInterval(function(){
+          counter++;
+        }, 1000);
+      });
+      var offHover = $(iElement).on('mouseout', function() {
+        console.log(counter);
+        clearInterval(onHover);
+        counter = 0;
+      });
+    }
+  };
+}]);
+
+app.directive('classify', [function () {
+  return {
+    restrict: 'EAC',
+    link: function (scope, iElement, iAttrs) {
+      var $text = $(iElement).text();
+      $(iElement).addClass($text);
+    }
+  };
+}]);
+
 app.directive('slider', function() {
   var updateSeekPercentage = function($seekBar, event) {
     var barWidth = $seekBar.width();
@@ -202,7 +243,7 @@ app.directive('slider', function() {
     var percentageString = offsetXPercent + '%';
     $seekBar.find('.fill').width(percentageString);
     $seekBar.find('.thumb').css({left: percentageString});
-  }
+  };
 
   return {
     templateUrl: '/templates/directives/slider.html',
