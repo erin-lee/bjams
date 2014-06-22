@@ -150,11 +150,11 @@ app.service('SongPlayer', function(){
 
     play: function() {
       this.playing = true;
-      currentSoundFile.play();
+      currentSoundFile.play().fadeIn();
     },
     pause: function() {
       this.playing = false;
-      currentSoundFile.pause();
+      currentSoundFile.pause().fadeOut(2000);
     },
     next: function() {
       var currentTrackIndex = trackIndex(this.currentAlbum, this.currentSong);
