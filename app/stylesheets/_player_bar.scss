@@ -119,6 +119,14 @@
    border-radius: 2px;
    position: relative;
    cursor: pointer;
+
+   &:active {
+    .fill,
+    .thumb {
+      transition: none;
+    }
+   }
+
    .fill {
      background: white;
      width: 36%;
@@ -140,7 +148,8 @@
      transition: all 100ms ease-in-out;
    }
 
-   &:hover .thumb {
+   &:hover .thumb,
+   &:active .thumb {
      width: 20px;
      height: 20px;
      margin-top: -10px;
