@@ -118,6 +118,7 @@ app.controller('AlbumController', ['$scope', 'SongPlayer', 'ConsoleLogger',funct
   };
 
   $scope.pauseSong = function(song) {
+    playingSong = null;
     SongPlayer.pause();
   };
   $scope.logger = ConsoleLogger;
@@ -195,9 +196,9 @@ app.directive('slider', ['$document', function($document) {
     var offsetX =  event.pageX - $slider.offset().left; // Distance from left
     var sliderWidth = $slider.width(); // Width of slider
     var offsetXPercent = (offsetX  / sliderWidth);
-    offsetXPercent = Math.max(0, offsetXPercent);
-    offsetXPercent = Math.min(1, offsetXPercent);
-    return offsetXPercent;
+    //offsetXPercent = Math.max(0, offsetXPercent);
+    //offsetXPercent = Math.min(1, offsetXPercent);
+    return parseInt(offsetXPercent*100,10);
   };
 
   return {
