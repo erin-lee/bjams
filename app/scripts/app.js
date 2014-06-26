@@ -1,8 +1,3 @@
-// require("./landing");
-// require("./collection");
-// require("./album");
-// require("./profile");
-
 // Example album.
 var albumPicasso = {
   name: 'The Colors',
