@@ -120,6 +120,12 @@ app.controller('AlbumController', ['$scope', 'SongPlayer', 'ConsoleLogger',funct
 
 app.controller('PlayerBarController', ['$scope', 'SongPlayer', 'ConsoleLogger', function($scope, SongPlayer, ConsoleLogger) {
   $scope.songPlayer = SongPlayer;
+
+  SongPlayer.onTimeUpdate(function(event, time) {
+    $scope.$apply(function(){
+      $scope.playTime = time;
+    });
+  });
 }]);
 
 app.service('ConsoleLogger', function() {
@@ -131,7 +137,7 @@ app.service('ConsoleLogger', function() {
   };
 });
 
-app.service('SongPlayer', function(){
+app.service('SongPlayer', function($rootScope){
   var currentSoundFile = null;
   var trackIndex = function(album, song) {
     return album.songs.indexOf(song);
@@ -173,6 +179,9 @@ app.service('SongPlayer', function(){
         currentSoundFile.setTime(time);
       }
     },
+    onTimeUpdate: function(callback) {
+      return $rootScope.$on('sound:timeupdate', callback);
+    },
     setSong: function(album, song) {
       if (currentSoundFile) {
         currentSoundFile.stop();
@@ -182,6 +191,9 @@ app.service('SongPlayer', function(){
       currentSoundFile = new buzz.sound(song.audioUrl, {
         formats: [ "mp3" ],
         preload: true
+      });
+      currentSoundFile.bind('timeupdate', function(e) {
+        $rootScope.$broadcast('sound:timeupdate', this.getTime());
       });
 
       this.play();
@@ -282,3 +294,26 @@ app.directive('slider', ['$document', function($document) {
     }
   };
 }]);
+
+app.filter('timecode', function() {
+  return function(seconds) {
+    seconds = Number.parseFloat(seconds);
+
+    if (Number.isNaN(seconds)) {
+      return '-:--';
+    }
+
+    var wholeSeconds = Math.floor(seconds);
+    var minutes = Math.floor(wholeSeconds / 60);
+    remainingSeconds = wholeSeconds % 60;
+    var output = minutes + ':';
+
+    if (remainingSeconds < 10) {
+      output += '0';
+    }
+
+    output += remainingSeconds;
+
+    return output;
+  };
+});
